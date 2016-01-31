@@ -1,5 +1,7 @@
 var data;
 var baseUrl = 'https://api.spotify.com/v1/search?type=track&query='
+var artistUrl = 'https://api.spotify.com/v1/artists/{id}'
+
 var myApp = angular.module('myApp', [])
 
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
@@ -9,7 +11,9 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       data = $scope.tracks = response.tracks.items
       
     })
-  }
+
+}
+
   $scope.play = function(song) {
     if($scope.currentSong == song) {
       $scope.audioObject.pause()

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Spotify Template</title>
+	<title>Spotify by Chengsu</title>
 	
 	<!-- Include libraries -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
@@ -15,9 +15,17 @@
 	<!-- Read scripts -->
 	<script src="app.js"></script>
 	<link href="app.css" type="text/css" rel="stylesheet"/>	
-	
 </head>
 <body>
+	<!-- Navigation bar-->
+<nav>		
+  	<ul>
+  		<nav>
+  		<a href="#title"><img src="http://www.musiciansoncall.org/images/content/pagebuilder/spotify-logo-primary-horizontal-dark-background-rgb.png" alt="logo" height="70" width="200"></a>
+  		<li>| By Chengsu</li>
+  </ul>
+</nav>
+
 	<!-- Initiate app -->
 	<div ng-app="myApp" ng-controller="myCtrl">
 		<!-- Form -->
@@ -27,7 +35,7 @@
 				<input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
 			</div>
 			<div class="form-group">
-				<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
+				<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs(); getRelated(track)" type="submit">Submit</button>
 			</div>
 		</form>
 		
@@ -37,10 +45,15 @@
 				<span ng-show="tracks.length>0">Click to sample</span>
 				<span ng-show="currentSong && !audioObject.paused">(playing)</span>
 			</div>
-			<ul>
-				<li ng-repeat="track in tracks" class="" ng-click="play(track.preview_url)" title="{{track.name}}">{{track.name + ', by ' + track.artists[0].name}}</li>
-			</ul>			
+				<div class="help-block col-sm-4" ng-repeat="track in tracks" class="" ng-click="play(track.preview_url)" title="{{track.name}}">
+					<p>{{track.name + ', by ' + track.artists[0].name}}</p>
+					<img src = '{{track.album.images[0].url}}'>
+				</div>
+		<!-- A separate div to display all the related artists-->
+			<div id = "related">
+				<div id = "new-div" ng-repeat="related artists">
+				<div ng-click="play(track.preview_url)"> <img src = '{{track.album.images[0].url}}'></div>
+			</div>
 		</div>
-	</div>
 </body>
 </html>
